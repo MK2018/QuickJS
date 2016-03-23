@@ -19,6 +19,8 @@ NOTES:
 
 var qk = new function(){
 
+	var pages;
+
 	/**Define qk-page's prototype **/
 	var qkpageProto = Object.create(HTMLElement.prototype);
 	qkpageProto.show = function(){
@@ -39,6 +41,13 @@ var qk = new function(){
 	}
 	/**End qk-const's prototype **/
 
+	/**Define qk-link's prototype **/
+	var qklinkProto = Object.create(HTMLElement.prototype);
+	qklinkProto.navTo = function(){
+		//switch to new qk-page
+	}
+	/**End qk-link's prototype **/
+
 
 	var register = function(){
 		document.registerElement('qk-page', {
@@ -47,15 +56,25 @@ var qk = new function(){
 		document.registerElement('qk-const', {
 			prototype: qkconstProto
 		});
+		document.registerElement('qk-link', {
+			prototype: qklinkProto
+		});
 	};
 
 	var displayHome = function(){
-
-		//display the initial page
+		for(var i = 1, len = pages.length; i < len; i++){
+			pages[i].home ? pages[i].show() : pages[i].hide();
+		}		
 	};
+
+	var fetchPages = function(){
+		pages = document.querySelectorAll('qk-page');
+	}
 
 	this.init = function(){
 		register();
+		fetchPages();
+		displayHome();
 	};
 };
 
