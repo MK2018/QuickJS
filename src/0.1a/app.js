@@ -16,3 +16,49 @@ NOTES:
 5. JS using info to carry out info as parsed
 -------------------------------
 */
+
+var qk = new function(){
+
+	/**Define qk-page's prototype **/
+	var qkpageProto = Object.create(HTMLElement.prototype);
+	qkpageProto.show = function(){
+		this.style.display = "block";
+	}
+	qkpageProto.hide = function(){
+		this.style.display = "none";
+	}
+	/**End qk-page's prototype **/
+
+	/**Define qk-const's prototype **/
+	var qkconstProto = Object.create(HTMLElement.prototype);
+	qkconstProto.show = function(){
+		this.style.display = "block";
+	}
+	qkconstProto.hide = function(){
+		this.style.display = "none";
+	}
+	/**End qk-const's prototype **/
+
+
+	var register = function(){
+		document.registerElement('qk-page', {
+			prototype: qkpageProto
+		});
+		document.registerElement('qk-const', {
+			prototype: qkconstProto
+		});
+	};
+
+	var displayHome = function(){
+
+		//display the initial page
+	};
+
+	this.init = function(){
+		register();
+	};
+};
+
+window.onload = function(){
+	qk.init();
+}
