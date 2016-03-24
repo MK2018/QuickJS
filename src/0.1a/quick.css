@@ -16,3 +16,7 @@ qk-link{
 qk-link:active{
 	color: #FF0000;
 }
+qk-const{
+	position: absolute;
+	z-index: 10;
+}

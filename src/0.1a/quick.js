@@ -74,10 +74,7 @@ var qk = new function(){
 
 	var displayHome = function(){
 		for(var i = 0, l = pages.length; i < l; i++){
-			(pages[i].dataset.home === 'true') ? (
-				pages[i].show(),
-				currentPage = i
-			) : pages[i].hide();
+			(pages[i].dataset.home === 'true') ? (pages[i].show(), currentPage = i) : pages[i].hide();
 		}		
 	};
 
