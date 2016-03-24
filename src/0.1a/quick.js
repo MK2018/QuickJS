@@ -20,6 +20,7 @@ NOTES:
 var qk = new function(){
 
 	var pages;
+	var currentPage;
 
 	/**Define qk-page's prototype **/
 	var qkpageProto = Object.create(HTMLElement.prototype);
@@ -43,13 +44,15 @@ var qk = new function(){
 
 	/**Define qk-link's prototype **/
 	var qklinkProto = Object.create(HTMLElement.prototype);
-	qklinkProto.navTo = function(){
-		//switch to new qk-page
+	qklinkProto.goto = function(){
+		pages[currentPage].hide();
+		currentPage = pageById(this.dataset.to);
+		pages[currentPage].show();
 	}
 	/**End qk-link's prototype **/
 
 
-	var register = function(){
+	var registerElements = function(){
 		document.registerElement('qk-page', {
 			prototype: qkpageProto
 		});
@@ -61,9 +64,20 @@ var qk = new function(){
 		});
 	};
 
+	var registerListeners = function(){
+		Array.prototype.slice.call(document.querySelectorAll('qk-link')).forEach(function(current){
+			current.addEventListener('click', function(){
+				current.goto();
+			})
+		});
+	}
+
 	var displayHome = function(){
-		for(var i = 1, len = pages.length; i < len; i++){
-			pages[i].home ? pages[i].show() : pages[i].hide();
+		for(var i = 0, l = pages.length; i < l; i++){
+			(pages[i].dataset.home === 'true') ? (
+				pages[i].show(),
+				currentPage = i
+			) : pages[i].hide();
 		}		
 	};
 
@@ -71,13 +85,22 @@ var qk = new function(){
 		pages = document.querySelectorAll('qk-page');
 	}
 
-	this.init = function(){
-		register();
+	var pageById = function(id){
+		for(var i = 0, l = pages.length; i < l; i++){
+			if(pages[i].dataset.id===id)
+				return i;
+		}
+		return -1;
+	}
+
+	this.go = function(){
+		registerElements();
+		registerListeners();
 		fetchPages();
 		displayHome();
 	};
 };
 
 window.onload = function(){
-	qk.init();
+	qk.go();
 }
