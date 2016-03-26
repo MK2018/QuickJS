@@ -1,1 +1,43 @@
-"Hello world" 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Quick.JS Demo Page 0.1a</title>
+
+    <link rel="stylesheet" type="text/css" href="./quick.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  </head>
+  <body>
+    <qk-page data-id="page1">
+		Welcome to alpha build 0.1 of Quick.JS.
+		<qk-link data-to="page3">Go to page 3</qk-link>
+	</qk-page>
+	<qk-page data-id="page2">
+		Page 2!
+		<qk-link data-to="page1">Go to page 1</qk-link>
+	</qk-page>
+	<qk-page data-id="page3">
+		Page 3!
+		<qk-link data-to="page4">Go to page 4</qk-link>
+	</qk-page>
+	<qk-page data-id="page4">
+		Page 4!
+		<qk-link data-to="page5">Go to page 5</qk-link>
+	</qk-page>
+	<qk-page data-id="page5">
+		Page 5!
+		<qk-link data-to="page2">Go to page 2</qk-link>
+	</qk-page>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="./quick.js"></script>
+    <script>
+    	qk.go({
+    		home: "page1",
+    	});
+    </script>
+  </body>
+</html>
