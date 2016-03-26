@@ -16,90 +16,100 @@ NOTES:
 5. JS using info to carry out info as parsed
 -------------------------------
 */
-
 var qk = new function(){
 
 	var pages;
 	var currentPage;
 
-	/**Define qk-page's prototype **/
-	var qkpageProto = Object.create(HTMLElement.prototype);
-	qkpageProto.show = function(){
-		this.style.display = "block";
-	}
-	qkpageProto.hide = function(){
-		this.style.display = "none";
-	}
-	/**End qk-page's prototype **/
-
-	/**Define qk-const's prototype **/
-	var qkconstProto = Object.create(HTMLElement.prototype);
-	qkconstProto.show = function(){
-		this.style.display = "block";
-	}
-	qkconstProto.hide = function(){
-		this.style.display = "none";
-	}
-	/**End qk-const's prototype **/
-
-	/**Define qk-link's prototype **/
-	var qklinkProto = Object.create(HTMLElement.prototype);
-	qklinkProto.goto = function(){
-		pages[currentPage].hide();
-		currentPage = pageById(this.dataset.to);
-		pages[currentPage].show();
-	}
-	/**End qk-link's prototype **/
-
-
-	var registerElements = function(){
-		document.registerElement('qk-page', {
-			prototype: qkpageProto
-		});
-		document.registerElement('qk-const', {
-			prototype: qkconstProto
-		});
-		document.registerElement('qk-link', {
-			prototype: qklinkProto
-		});
-	};
-
-	var registerListeners = function(){
-		Array.prototype.slice.call(document.querySelectorAll('qk-link')).forEach(function(current){
-			current.addEventListener('click', function(){
-				current.goto();
-			})
-		});
-	}
-
-	var displayHome = function(home){
-		var hId = currentPage = pageById(home);
-		for(var i = 0, l = pages.length; i < l; i++){
-			pages[i].hide();
-		}
-		pages[hId].show();		
-	};
-
-	var fetchPages = function(){
-		pages = document.querySelectorAll('qk-page');
-	}
-
-	var pageById = function(id){
-		for(var i = 0, l = pages.length; i < l; i++){
-			if(pages[i].dataset.id===id)
-				return i;
-		}
-		return -1;
-	}
-
 	this.go = function(args){
-		registerElements();
-		registerListeners();
-		fetchPages();
-		displayHome(args.home);
-	};
-};
+		main.go(args);
+	}
 
-//window.onload = function(){
-//	qk.go();
-//}
+	var protos = new function(){
+		this.show = function(){
+			this.style.display = "block";
+		}
+		this.hide = function(){
+			this.style.display = "none";
+		}
+		this.gotoNoArg = function(){
+			pages[currentPage].hide();
+			currentPage = main.pageById(this.dataset.to);
+			pages[currentPage].show();
+		}
+		this.gotoArg = function(toPage){
+			pages[currentPage].hide();
+			currentPage = toPage;
+			pages[currentPage].show();
+		}
+	};
+
+	var main = new function(){
+
+		/**Define qk-page's prototype **/
+		var qkpageProto = Object.create(HTMLElement.prototype);
+		qkpageProto.show = protos.show;
+		qkpageProto.hide = protos.hide;
+		/**End qk-page's prototype **/
+
+		/**Define qk-const's prototype **/
+		var qkconstProto = Object.create(HTMLElement.prototype);
+		qkconstProto.show = protos.show;
+		qkconstProto.hide = protos.hide;
+		/**End qk-const's prototype **/
+
+		/**Define qk-link's prototype **/
+		var qklinkProto = Object.create(HTMLElement.prototype);
+		qklinkProto.goto = protos.gotoNoArg;
+		/**End qk-link's prototype **/
+
+
+		var registerElements = function(){
+			document.registerElement('qk-page', {
+				prototype: qkpageProto
+			});
+			document.registerElement('qk-const', {
+				prototype: qkconstProto
+			});
+			document.registerElement('qk-link', {
+				prototype: qklinkProto
+			});
+		};
+
+		var registerListeners = function(){
+			Array.prototype.slice.call(document.querySelectorAll('qk-link')).forEach(function(current){
+				current.addEventListener('click', function(){
+					current.goto();
+				})
+			});
+		}
+
+		var displayHome = function(home){
+			var hId = currentPage = main.pageById(home);
+			for(var i = 0, l = pages.length; i < l; i++){
+				pages[i].hide();
+			}
+			pages[hId].show();		
+		};
+
+		var fetchPages = function(){
+			pages = document.querySelectorAll('qk-page');
+		}
+
+		this.pageById = function(id){
+			for(var i = 0, l = pages.length; i < l; i++){
+				if(pages[i].dataset.id===id)
+					return i;
+			}
+			return -1;
+		};
+
+		this.go = function(args){
+			registerElements();
+			registerListeners();
+			fetchPages();
+			displayHome(args.home);
+		};
+	};
+
+}
