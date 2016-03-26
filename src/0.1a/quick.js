@@ -72,10 +72,12 @@ var qk = new function(){
 		});
 	}
 
-	var displayHome = function(){
+	var displayHome = function(home){
+		var hId = currentPage = pageById(home);
 		for(var i = 0, l = pages.length; i < l; i++){
-			(pages[i].dataset.home === 'true') ? (pages[i].show(), currentPage = i) : pages[i].hide();
-		}		
+			pages[i].hide();
+		}
+		pages[hId].show();		
 	};
 
 	var fetchPages = function(){
@@ -90,14 +92,14 @@ var qk = new function(){
 		return -1;
 	}
 
-	this.go = function(){
+	this.go = function(args){
 		registerElements();
 		registerListeners();
 		fetchPages();
-		displayHome();
+		displayHome(args.home);
 	};
 };
 
-window.onload = function(){
-	qk.go();
-}
+//window.onload = function(){
+//	qk.go();
+//}
