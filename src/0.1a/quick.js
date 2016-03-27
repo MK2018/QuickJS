@@ -25,6 +25,10 @@ var qk = new function(){
 		main.go(args);
 	}
 
+	this.goTo = function(to){
+		protos.gotoNoArg(to);
+	}
+
 	var protos = new function(){
 		this.show = function(){
 			this.style.display = "block";
@@ -42,7 +46,14 @@ var qk = new function(){
 			currentPage = toPage;
 			pages[currentPage].show();
 		}
+		this.bindData = function(data, bindTo){
+			dataBind.bind(data, bindTo);
+		}
 	};
+
+	var dataBind = new function(){
+		//do all of the magic template-style data binding here.
+	}
 
 	var main = new function(){
 
@@ -63,6 +74,11 @@ var qk = new function(){
 		qklinkProto.goto = protos.gotoNoArg;
 		/**End qk-link's prototype **/
 
+		/**Define qk-data's prototype **/
+		var qkdataProto = Object.create(HTMLElement.prototype);
+		qkdataProto.bind = protos.bindData;
+		/**End qk-data's prototype **/
+
 
 		var registerElements = function(){
 			document.registerElement('qk-page', {
@@ -73,6 +89,9 @@ var qk = new function(){
 			});
 			document.registerElement('qk-link', {
 				prototype: qklinkProto
+			});
+			document.registerElement('qk-data', {
+				prototype: qkdataProto
 			});
 		};
 
