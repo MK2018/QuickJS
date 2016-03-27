@@ -23,64 +23,66 @@ var qk = new function(){
 
 	this.go = function(args){
 		main.go(args);
-	}
+	};
 
 	this.goTo = function(to){
 		protos.gotoNoArg(to);
-	}
+	};
 
 	var protos = new function(){
 		this.show = function(){
 			this.style.display = "block";
-		}
+		};
 		this.hide = function(){
 			this.style.display = "none";
-		}
+		};
 		this.gotoNoArg = function(){
 			pages[currentPage].hide();
 			currentPage = main.pageById(this.dataset.to);
 			pages[currentPage].show();
-		}
+		};
 		this.gotoArg = function(toPage){
 			pages[currentPage].hide();
 			currentPage = toPage;
 			pages[currentPage].show();
-		}
+		};
 		this.bindData = function(data, bindTo){
 			dataBind.bind(data, bindTo);
-		}
+		};
 	};
 
 	var dataBind = new function(){
 		//do all of the magic template-style data binding here.
-	}
+		this.bind = function(data, bindTo){
+
+		};
+	};
 
 	var main = new function(){
 
-		/**Define qk-page's prototype **/
-		var qkpageProto = Object.create(HTMLElement.prototype);
-		qkpageProto.show = protos.show;
-		qkpageProto.hide = protos.hide;
-		/**End qk-page's prototype **/
-
-		/**Define qk-const's prototype **/
-		var qkconstProto = Object.create(HTMLElement.prototype);
-		qkconstProto.show = protos.show;
-		qkconstProto.hide = protos.hide;
-		/**End qk-const's prototype **/
-
-		/**Define qk-link's prototype **/
-		var qklinkProto = Object.create(HTMLElement.prototype);
-		qklinkProto.goto = protos.gotoNoArg;
-		/**End qk-link's prototype **/
-
-		/**Define qk-data's prototype **/
-		var qkdataProto = Object.create(HTMLElement.prototype);
-		qkdataProto.bind = protos.bindData;
-		/**End qk-data's prototype **/
-
-
 		var registerElements = function(){
+			/**Define qk-page's prototype **/
+			var qkpageProto = Object.create(HTMLElement.prototype);
+			qkpageProto.show = protos.show;
+			qkpageProto.hide = protos.hide;
+			/**End qk-page's prototype **/
+
+			/**Define qk-const's prototype **/
+			var qkconstProto = Object.create(HTMLElement.prototype);
+			qkconstProto.show = protos.show;
+			qkconstProto.hide = protos.hide;
+			/**End qk-const's prototype **/
+
+			/**Define qk-link's prototype **/
+			var qklinkProto = Object.create(HTMLElement.prototype);
+			qklinkProto.goto = protos.gotoNoArg;
+			/**End qk-link's prototype **/
+
+			/**Define qk-data's prototype **/
+			var qkdataProto = Object.create(HTMLElement.prototype);
+			qkdataProto.bind = protos.bindData;
+			/**End qk-data's prototype **/
+
 			document.registerElement('qk-page', {
 				prototype: qkpageProto
 			});
@@ -101,7 +103,7 @@ var qk = new function(){
 					current.goto();
 				})
 			});
-		}
+		};
 
 		var displayHome = function(home){
 			var hId = currentPage = main.pageById(home);
@@ -113,7 +115,7 @@ var qk = new function(){
 
 		var fetchPages = function(){
 			pages = document.querySelectorAll('qk-page');
-		}
+		};
 
 		this.pageById = function(id){
 			for(var i = 0, l = pages.length; i < l; i++){
@@ -131,4 +133,4 @@ var qk = new function(){
 		};
 	};
 
-}
+};
