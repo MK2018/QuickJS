@@ -19,6 +19,7 @@ NOTES:
 var qk = new function(){
 
 	var pages;
+	var datas;
 	var currentPage;
 
 	this.go = function(args){
@@ -52,9 +53,8 @@ var qk = new function(){
 	};
 
 	var dataBind = new function(){
-		//do all of the magic template-style data binding here.
 		this.bind = function(data, bindTo){
-
+			console.log(randData.helloData);
 		};
 	};
 
@@ -113,8 +113,15 @@ var qk = new function(){
 			pages[hId].show();		
 		};
 
-		var fetchPages = function(){
+		var fetchPagesAndData = function(){
 			pages = document.querySelectorAll('qk-page');
+			datas = document.querySelectorAll('qk-data');
+		};
+
+		var triggerDataBind = function(){
+			for(var i = 0, l = datas.length; i < l; i++){
+				datas[i].bindData(datas[i].dataset.source,datas[i]);
+			}
 		};
 
 		this.pageById = function(id){
@@ -128,7 +135,8 @@ var qk = new function(){
 		this.go = function(args){
 			registerElements();
 			registerListeners();
-			fetchPages();
+			fetchPagesAndData();
+			triggerDataBind();
 			displayHome(args.home);
 		};
 	};
