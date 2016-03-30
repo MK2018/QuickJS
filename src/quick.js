@@ -54,7 +54,7 @@ var qk = new function(){
 
 	var dataBind = new function(){
 		this.bind = function(data, bindTo){
-			console.log(randData.helloData);
+			bindTo.innerHTML = (eval(bindTo.dataset.source));
 		};
 	};
 
@@ -120,7 +120,7 @@ var qk = new function(){
 
 		var triggerDataBind = function(){
 			for(var i = 0, l = datas.length; i < l; i++){
-				datas[i].bindData(datas[i].dataset.source,datas[i]);
+				datas[i].bind(datas[i].dataset.source, datas[i]);
 			}
 		};
 
