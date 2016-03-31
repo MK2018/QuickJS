@@ -54,8 +54,13 @@ var qk = new function(){
 
 	var dataBind = new function(){
 		this.bind = function(data, bindTo){
-			bindTo.innerHTML = (eval(bindTo.dataset.source));
+			bindTo.innerHTML = (parseDataSource(bindTo.dataset.source));
 		};
+
+		var parseDataSource(path){
+			//separate out into strings, search manually with eval-like behavior
+			//solves security problems
+		}
 	};
 
 	var main = new function(){
