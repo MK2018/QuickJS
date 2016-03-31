@@ -54,12 +54,16 @@ var qk = new function(){
 
 	var dataBind = new function(){
 		this.bind = function(data, bindTo){
-			bindTo.innerHTML = (parseDataSource(bindTo.dataset.source));
+			bindTo.innerHTML = bindTo.innerHTML.replace("[[data.hello]]", parseDataSource(bindTo.dataset.source).hello);
 		};
 
-		var parseDataSource(path){
-			//separate out into strings, search manually with eval-like behavior
-			//solves security problems
+		var parseDataSource = function(path){
+			var loc = path.split('.');
+			var obj = window;
+			while(loc.length > 0){
+				obj = obj[loc.shift()];
+			}
+			return obj;
 		}
 	};
 
