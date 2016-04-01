@@ -54,6 +54,10 @@ var qk = new function(){
 
 	var dataBind = new function(){
 		this.bind = function(data, bindTo){
+			var unbound = bindTo.innerHTML;
+			while(unbound.indexOf("[[") > -1){
+				console.log(unbound.substring(unbound.indexOf("[["), unbound.indexOf("]]")));
+			}
 			bindTo.innerHTML = bindTo.innerHTML.replace("[[data.hello]]", parseDataSource(bindTo.dataset.source).hello);
 		};
 
