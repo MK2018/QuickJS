@@ -47,28 +47,97 @@ var qk = new function(){
 			currentPage = toPage;
 			pages[currentPage].show();
 		};
-		this.bindData = function(data, bindTo){
-			dataBind.bind(data, bindTo);
+		this.bindData = function(bindTo){
+			dataBind.bind(bindTo);
 		};
 	};
 
 	var dataBind = new function(){
-		this.bind = function(data, bindTo){
+		/**********************************************START OBJECT.WATCH POLYFILL*************************/
+		/*
+		 * By Eli Grey, http://eligrey.com
+		 * Public Domain.
+		 * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+		 */
+
+		// object.watch
+		if (!Object.prototype.watch) {
+			Object.defineProperty(Object.prototype, "watch", {
+				  enumerable: false
+				, configurable: true
+				, writable: false
+				, value: function (prop, handler) {
+					var
+					  oldval = this[prop]
+					, newval = oldval
+					, getter = function () {
+						return newval;
+					}
+					, setter = function (val) {
+						oldval = newval;
+						return newval = handler.call(this, prop, oldval, val);
+					}
+					;
+					
+					if (delete this[prop]) { // can't watch constants
+						Object.defineProperty(this, prop, {
+							  get: getter
+							, set: setter
+							, enumerable: true
+							, configurable: true
+						});
+					}
+				}
+			});
+		}
+
+		// object.unwatch
+		if (!Object.prototype.unwatch) {
+			Object.defineProperty(Object.prototype, "unwatch", {
+				  enumerable: false
+				, configurable: true
+				, writable: false
+				, value: function (prop) {
+					var val = this[prop];
+					delete this[prop]; // remove accessors
+					this[prop] = val;
+				}
+			});
+		}
+
+		/**********************************************END OBJECT.WATCH POLYFILL*************************/
+
+		this.bind = function(bindTo){
 			var unbound = bindTo.innerHTML;
-			while(unbound.indexOf("[[") > -1){
-				console.log(unbound.substring(unbound.indexOf("[["), unbound.indexOf("]]")));
-			}
-			bindTo.innerHTML = bindTo.innerHTML.replace("[[data.hello]]", parseDataSource(bindTo.dataset.source).hello);
+			var dataObj = parseDataSource(bindTo.dataset.source, window);
+			var bound = getBoundString(dataObj, unbound);
+			bindTo.innerHTML = bound;
 		};
 
-		var parseDataSource = function(path){
+		var getBoundString = function(dataObj, unbound){
+			var bound = "";
+			while(unbound.indexOf("[[") > -1){
+				path = unbound.substring(unbound.indexOf("[[")+2, unbound.indexOf("]]"));
+				bound += unbound.substring(0, unbound.indexOf("[["));
+				unbound = unbound.substring(unbound.indexOf("]]")+2);
+				specObj = parseDataSource(path.substring(path.indexOf("data.")+5), dataObj);
+				bound += specObj;
+			}
+			bound += unbound;
+			if(bound.indexOf("[[") > -1){
+				bound = getBoundString(dataObj, bound);
+			}
+			return bound;
+		};
+
+		var parseDataSource = function(path, root){
 			var loc = path.split('.');
-			var obj = window;
+			var obj = root;
 			while(loc.length > 0){
 				obj = obj[loc.shift()];
 			}
 			return obj;
-		}
+		};
 	};
 
 	var main = new function(){
@@ -133,7 +202,7 @@ var qk = new function(){
 
 		var triggerDataBind = function(){
 			for(var i = 0, l = datas.length; i < l; i++){
-				datas[i].bind(datas[i].dataset.source, datas[i]);
+				datas[i].bind(datas[i]);
 			}
 		};
 
