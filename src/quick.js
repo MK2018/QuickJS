@@ -12,8 +12,7 @@ NOTES:
 	1.c. (Possibly, we see where this ended up for Angular) Include conditional, Angular-style tags
 2. Custom CSS stylesheet bindings per page
 3. JS parsing of all of this info
-4. Custom DOM abstractor
-5. JS using info to carry out info as parsed
+4. JS using info to carry out info as parsed
 -------------------------------
 */
 var qk = new function(){
