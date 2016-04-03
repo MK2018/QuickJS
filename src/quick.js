@@ -52,6 +52,12 @@ var qk = new function(){
 	};
 
 	var dataBind = new function(){
+		function BindingString(unbound, parent){
+			this.unbound = unbound;
+			this.bound = "";
+			this.parent = parent;
+		}
+
 		/**********************************************START OBJECT.WATCH POLYFILL*************************/
 		/*
 		 * By Eli Grey, http://eligrey.com
@@ -113,6 +119,13 @@ var qk = new function(){
 			bindTo.innerHTML = bound;
 		};
 
+		var registerVarToWatch = function(parent, value){
+			parent.watch(String(value), function(){
+				getBoundString();
+				//console.log("VALUE HAS CHANGED");
+			});
+		};
+
 		var getBoundString = function(dataObj, unbound){
 			var bound = "";
 			while(unbound.indexOf("[[") > -1){
@@ -120,6 +133,7 @@ var qk = new function(){
 				bound += unbound.substring(0, unbound.indexOf("[["));
 				unbound = unbound.substring(unbound.indexOf("]]")+2);
 				specObj = parseDataSource(path.substring(path.indexOf("data.")+5), dataObj);
+				registerVarToWatch(dataObj, path.substring(path.indexOf("data.")+5));
 				bound += specObj;
 			}
 			bound += unbound;
