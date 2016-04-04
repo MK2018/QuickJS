@@ -52,11 +52,6 @@ var qk = new function(){
 	};
 
 	var dataBind = new function(){
-		function BindingString(unbound, parent){
-			this.unbound = unbound;
-			this.bound = "";
-			this.parent = parent;
-		}
 
 		/**********************************************START OBJECT.WATCH POLYFILL*************************/
 		/*
@@ -115,30 +110,40 @@ var qk = new function(){
 		this.bind = function(bindTo){
 			var unbound = bindTo.innerHTML;
 			var dataObj = parseDataSource(bindTo.dataset.source, window);
-			var bound = getBoundString(dataObj, unbound);
+			var bound = getBoundString(dataObj, unbound, bindTo);
 			bindTo.innerHTML = bound;
 		};
 
-		var registerVarToWatch = function(parent, value){
-			parent.watch(String(value), function(){
-				getBoundString();
-				//console.log("VALUE HAS CHANGED");
+		var varsBound = {};
+
+		var registerVarToWatch = function(parent, value, element, unbound){
+			//console.log(parent);
+			//console.log(value);
+			//console.log(element);
+			parent.watch(String(value), function(varName, value){
+				console.log(value);
+				console.log("CHANGED!");
+				console.log(varsBound.hello);
+				varsBound[varName].e.bind(varsBound[varName].e);
 			});
+			varsBound[String(value)] = {"e" : element, "u" : unbound};
+			
 		};
 
-		var getBoundString = function(dataObj, unbound){
+		var getBoundString = function(dataObj, unbound, element){
 			var bound = "";
+			var ounbound = unbound;
 			while(unbound.indexOf("[[") > -1){
 				path = unbound.substring(unbound.indexOf("[[")+2, unbound.indexOf("]]"));
 				bound += unbound.substring(0, unbound.indexOf("[["));
 				unbound = unbound.substring(unbound.indexOf("]]")+2);
 				specObj = parseDataSource(path.substring(path.indexOf("data.")+5), dataObj);
-				registerVarToWatch(dataObj, path.substring(path.indexOf("data.")+5));
+				registerVarToWatch(dataObj, path.substring(path.indexOf("data.")+5), element, ounbound);
 				bound += specObj;
 			}
 			bound += unbound;
 			if(bound.indexOf("[[") > -1){
-				bound = getBoundString(dataObj, bound);
+				bound = getBoundString(dataObj, bound, element);
 			}
 			return bound;
 		};
