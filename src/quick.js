@@ -46,8 +46,8 @@ var qk = new function(){
 			currentPage = toPage;
 			pages[currentPage].show();
 		};
-		this.bindData = function(bindTo){
-			dataBind.bind(bindTo);
+		this.bindData = function(){
+			dataBind.bind(this);
 		};
 	};
 
@@ -107,6 +107,8 @@ var qk = new function(){
 
 		/**********************************************END OBJECT.WATCH POLYFILL*************************/
 
+		var varsBound = {};
+
 		this.bind = function(bindTo){
 			var unbound = bindTo.innerHTML;
 			var dataObj = parseDataSource(bindTo.dataset.source, window);
@@ -114,25 +116,19 @@ var qk = new function(){
 			bindTo.innerHTML = bound;
 		};
 
-		var varsBound = {};
-
 		var registerVarToWatch = function(parent, value, element, unbound){
-			//console.log(parent);
-			//console.log(value);
-			//console.log(element);
-			parent.watch(String(value), function(varName, value){
-				console.log(value);
-				console.log("CHANGED!");
-				console.log(varsBound.hello);
-				varsBound[varName].e.bind(varsBound[varName].e);
+			parent.watch(String(value), function(varName, ovalue, nvalue){
+				varsBound[varName].e.innerHTML = varsBound[varName].u;
+				setTimeout(varsBound[varName].e.bind, 100);
+				return nvalue;
 			});
-			varsBound[String(value)] = {"e" : element, "u" : unbound};
-			
+			varsBound[String(value)] = {"e" : element, "u" : unbound, "p" : parent};
 		};
 
 		var getBoundString = function(dataObj, unbound, element){
 			var bound = "";
 			var ounbound = unbound;
+			console.log(ounbound);
 			while(unbound.indexOf("[[") > -1){
 				path = unbound.substring(unbound.indexOf("[[")+2, unbound.indexOf("]]"));
 				bound += unbound.substring(0, unbound.indexOf("[["));
