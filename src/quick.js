@@ -46,8 +46,8 @@ var qk = new function(){
 			currentPage = toPage;
 			pages[currentPage].show();
 		};
-		this.bindData = function(){
-			dataBind.bind(this);
+		this.bindData = function(arg){
+			dataBind.bind(arg);
 		};
 	};
 
@@ -117,27 +117,50 @@ var qk = new function(){
 		};
 
 		var registerVarToWatch = function(parent, value, element, unbound){
-			parent.watch(String(value), function(varName, ovalue, nvalue){
+			parent.watch(String(value), function(varName, oldVal, newVal){
 				varsBound[varName].e.innerHTML = varsBound[varName].u;
-				setTimeout(varsBound[varName].e.bind, 100);
-				return nvalue;
+				setTimeout(varsBound[varName].e.bind, 0, varsBound[varName].e);
+				return newVal;
 			});
-			varsBound[String(value)] = {"e" : element, "u" : unbound, "p" : parent};
+			varsBound[String(value)] = {"e" : element, "u" : unbound};
 		};
 
 		var getBoundString = function(dataObj, unbound, element){
 			var bound = "";
-			var ounbound = unbound;
-			console.log(ounbound);
-			while(unbound.indexOf("[[") > -1){
-				path = unbound.substring(unbound.indexOf("[[")+2, unbound.indexOf("]]"));
-				bound += unbound.substring(0, unbound.indexOf("[["));
-				unbound = unbound.substring(unbound.indexOf("]]")+2);
-				specObj = parseDataSource(path.substring(path.indexOf("data.")+5), dataObj);
-				registerVarToWatch(dataObj, path.substring(path.indexOf("data.")+5), element, ounbound);
-				bound += specObj;
+			var origUnbound = unbound;
+			var toks = unbound.split("");
+
+			var tokData = {"wasOpenBracket" : false, "inExp" : false, "wasCloseBracket" : false, "activePath" : ""};
+			while(toks.length > 0){
+				tok = toks.shift();
+				if(tok === "["){
+					if(tokData.wasOpenBracket){
+						tokData.inExp = true;
+						tokData.wasOpenBracket = false;
+					}
+					else{
+						tokData.wasOpenBracket = true;
+					}
+				}
+				else if(tok === "]"){
+					if(tokData.wasCloseBracket){
+						tokData.inExp = false;
+						tokData.wasCloseBracket = false;
+						var varToBind = parseDataSource(tokData.activePath.substring(tokData.activePath.indexOf("data.")+5), dataObj);
+						registerVarToWatch(dataObj, tokData.activePath.substring(tokData.activePath.indexOf("data.")+5), element, origUnbound);
+						bound += varToBind;
+					}
+					else{
+						tokData.wasCloseBracket = true;
+					}
+				}
+				else if(tokData.inExp){
+					tokData.activePath += tok;
+				}
+				else{
+					bound += tok;
+				}
 			}
-			bound += unbound;
 			if(bound.indexOf("[[") > -1){
 				bound = getBoundString(dataObj, bound, element);
 			}
