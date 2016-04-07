@@ -152,7 +152,7 @@ var qk = new function(){
 					}
 					else{
 						tokData.wasCloseBracket = true;
-					}
+					}	
 				}
 				else if(tokData.inExp){
 					tokData.activePath += tok;
@@ -202,6 +202,11 @@ var qk = new function(){
 			qkdataProto.bind = protos.bindData;
 			/**End qk-data's prototype **/
 
+			/**Define qk-input's prototype **/
+			var qkinputProto = Object.create(HTMLElement.prototype);
+			//qkinputProto.? = ?		//no methods yet
+			/**End qk-input's prototype **/
+
 			document.registerElement('qk-page', {
 				prototype: qkpageProto
 			});
@@ -213,6 +218,9 @@ var qk = new function(){
 			});
 			document.registerElement('qk-data', {
 				prototype: qkdataProto
+			});
+			document.registerElement('qk-input', {
+				prototype: qkinputProto
 			});
 		};
 
