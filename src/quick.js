@@ -49,6 +49,9 @@ var qk = new function(){
 		this.bindData = function(arg){
 			dataBind.bind(arg);
 		};
+		this.onDataChange = function(){
+
+		}
 	};
 
 	var dataBind = new function(){
