@@ -50,8 +50,8 @@ var qk = new function(){
 			dataBind.bind(arg);
 		};
 		this.onDataChange = function(){
-
-		}
+			dataBind.onFormChange(this);
+		};
 	};
 
 	var dataBind = new function(){
@@ -111,6 +111,10 @@ var qk = new function(){
 		/**********************************************END OBJECT.WATCH POLYFILL*************************/
 
 		var varsBound = {};
+
+		this.onFormChange = function(){
+			console.log("changed");
+		}
 
 		this.bind = function(bindTo){
 			var unbound = bindTo.innerHTML;
@@ -232,6 +236,9 @@ var qk = new function(){
 				current.addEventListener('click', function(){
 					current.goto();
 				})
+			});
+			Array.prototype.slice.call(document.querySelectorAll('qk-input')).forEach(function(current){
+				current.setAttribute("onchange", "dataBind.onFormChange()");
 			});
 		};
 
