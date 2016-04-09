@@ -9,31 +9,9 @@ qk-page{
     overflow-x: hidden;
     overflow-y: auto;
 }
-qk-link{
-	color: blue;
-	text-decoration: underline;
-	cursor: pointer;
-}
-qk-link:active{
-	color: #FF0000;
-}
 qk-const{
 	position: absolute;
 	z-index: 10;
-}
-qk-input{
-	-moz-appearance: textfield;
-    -webkit-appearance: textfield;
-    background-color: white;
-    background-color: -moz-field;
-    border: 1px solid darkgray;
-    box-shadow: 1px 1px 1px 0 lightgray inset;  
-    font: -moz-field;
-    font: -webkit-small-control;
-    margin-top: 5px;
-    padding: 2px 3px;
-    width: 398px; 
-    color: black;
 }
 body{
 	overflow: hidden;

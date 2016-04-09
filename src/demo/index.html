@@ -16,7 +16,7 @@
   </head>
   <body class="body-wrapper">
   	<div class="container">
-	    <qk-page data-id="page1">
+	    <qk-page qk-pageid="page1">
 	    	<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
 					Welcome to Quick.JS
@@ -24,29 +24,33 @@
 			</div>
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
-					<qk-link data-to="page2">Go to page 2</qk-link>
+		    		<a qk-linkto="page2">Go to page 2</a>
 				</div>
 			</div>
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
-					<qk-data data-source="randData.sampleData">[[data.message]]</qk-data>
-					<br><qk-input contenteditable>One day this will support full 2-way data binding, and this will be the backbone of such things.</qk-input>
+					<input qk-datato="randData.sampleData3.test" autocomplete="off">
+					<div qk-datafrom="randData.sampleData3">Hello! My name is [[data.test]]</div>
 				</div>
 			</div>
 		</qk-page>
-		<qk-page data-id="page2">
+		<qk-page qk-pageid="page2">
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
 					Quick.JS is different.
+					<ul>
+						<li><div qk-datafrom="randData.sampleData2">[[data.firstline]]</div></li>
+						<li><div qk-datafrom="randData.sampleData2">[[data.secondline]]</div></li>
+					</ul>
 				</div>
 			</div>
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
-					<qk-link data-to="page3">Go to page 3</qk-link>
+					<a qk-linkto="page3">Go to page 3</a>
 				</div>
 			</div>
 		</qk-page>
-		<qk-page data-id="page3">
+		<qk-page qk-pageid="page3">
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
 					Everything is 1 page.
@@ -54,11 +58,11 @@
 			</div>
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
-					<qk-link data-to="page4">Go to page 4</qk-link>
+					<a qk-linkto="page4">Go to page 4</a>
 				</div>
 			</div>
 		</qk-page>
-		<qk-page data-id="page4">
+		<qk-page qk-pageid="page4">
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
 					It's simple, and good for things like websockets.
@@ -66,11 +70,11 @@
 			</div>
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
-					<qk-link data-to="page5">Go to page 5</qk-link>
+					<a qk-linkto="page5">Go to page 5</a>
 				</div>
 			</div>
 		</qk-page>
-		<qk-page data-id="page5">
+		<qk-page qk-pageid="page5">
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
 					There's plenty more to come...
@@ -78,7 +82,7 @@
 			</div>
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
-					<qk-link data-to="page1">Go back to page 1</qk-link>
+					<a qk-linkto="page1">Go back to page 1</a>
 				</div>
 			</div>
 		</qk-page>

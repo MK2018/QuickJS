@@ -25,10 +25,6 @@ var qk = new function(){
 		main.go(args);
 	};
 
-	this.goTo = function(to){
-		protos.gotoNoArg(to);
-	};
-
 	var protos = new function(){
 		this.show = function(){
 			this.style.display = "block";
@@ -36,22 +32,16 @@ var qk = new function(){
 		this.hide = function(){
 			this.style.display = "none";
 		};
-		this.gotoNoArg = function(){
+	};
+
+	var nav = new function(){
+
+		this.goto = function(to){
 			pages[currentPage].hide();
-			currentPage = main.pageById(this.dataset.to);
+			currentPage = main.pageById(to);
 			pages[currentPage].show();
 		};
-		this.gotoArg = function(toPage){
-			pages[currentPage].hide();
-			currentPage = toPage;
-			pages[currentPage].show();
-		};
-		this.bindData = function(arg){
-			dataBind.bind(arg);
-		};
-		this.onDataChange = function(){
-			dataBind.onFormChange(this);
-		};
+
 	};
 
 	var dataBind = new function(){
@@ -110,15 +100,20 @@ var qk = new function(){
 
 		/**********************************************END OBJECT.WATCH POLYFILL*************************/
 
+
 		var varsBound = {};
 
-		this.onFormChange = function(){
-			console.log("changed");
-		}
+		this.inputToBind = function(bindFrom){
+			var pathToVar = bindFrom.getAttribute("qk-datato");
+			var pathToParent = pathToVar.substring(0, pathToVar.lastIndexOf("."));
+			var varname = pathToVar.substring(pathToVar.lastIndexOf(".")+1);
+			var parent = parseDataSource(pathToParent, window);
+			parent[varname] = bindFrom.value;
+		};
 
 		this.bind = function(bindTo){
 			var unbound = bindTo.innerHTML;
-			var dataObj = parseDataSource(bindTo.dataset.source, window);
+			var dataObj = parseDataSource(bindTo.getAttribute("qk-datafrom"), window);
 			var bound = getBoundString(dataObj, unbound, bindTo);
 			bindTo.innerHTML = bound;
 		};
@@ -126,7 +121,7 @@ var qk = new function(){
 		var registerVarToWatch = function(parent, value, element, unbound){
 			parent.watch(String(value), function(varName, oldVal, newVal){
 				varsBound[varName].e.innerHTML = varsBound[varName].u;
-				setTimeout(varsBound[varName].e.bind, 0, varsBound[varName].e);
+				setTimeout(dataBind.bind, 0, varsBound[varName].e);
 				return newVal;
 			});
 			varsBound[String(value)] = {"e" : element, "u" : unbound};
@@ -199,46 +194,27 @@ var qk = new function(){
 			qkconstProto.hide = protos.hide;
 			/**End qk-const's prototype **/
 
-			/**Define qk-link's prototype **/
-			var qklinkProto = Object.create(HTMLElement.prototype);
-			qklinkProto.goto = protos.gotoNoArg;
-			/**End qk-link's prototype **/
-
-			/**Define qk-data's prototype **/
-			var qkdataProto = Object.create(HTMLElement.prototype);
-			qkdataProto.bind = protos.bindData;
-			/**End qk-data's prototype **/
-
-			/**Define qk-input's prototype **/
-			var qkinputProto = Object.create(HTMLElement.prototype);
-			//qkinputProto.? = ?		//no methods yet
-			/**End qk-input's prototype **/
-
 			document.registerElement('qk-page', {
 				prototype: qkpageProto
 			});
 			document.registerElement('qk-const', {
 				prototype: qkconstProto
 			});
-			document.registerElement('qk-link', {
-				prototype: qklinkProto
-			});
-			document.registerElement('qk-data', {
-				prototype: qkdataProto
-			});
-			document.registerElement('qk-input', {
-				prototype: qkinputProto
-			});
+
 		};
 
 		var registerListeners = function(){
-			Array.prototype.slice.call(document.querySelectorAll('qk-link')).forEach(function(current){
+			Array.prototype.slice.call(document.querySelectorAll('a[qk-linkto]')).forEach(function(current){
+				current.setAttribute("href", "#");
 				current.addEventListener('click', function(){
-					current.goto();
+					nav.goto(current.getAttribute("qk-linkto"));
 				})
 			});
-			Array.prototype.slice.call(document.querySelectorAll('qk-input')).forEach(function(current){
-				current.setAttribute("onchange", "dataBind.onFormChange()");
+
+			Array.prototype.slice.call(document.querySelectorAll('input[qk-datato]')).forEach(function(current){
+				current.addEventListener('input', function(){
+					dataBind.inputToBind(current);
+				})
 			});
 		};
 
@@ -251,19 +227,19 @@ var qk = new function(){
 		};
 
 		var fetchPagesAndData = function(){
-			pages = document.querySelectorAll('qk-page');
-			datas = document.querySelectorAll('qk-data');
+			pages = document.querySelectorAll('qk-page[qk-pageid]');
+			datas = document.querySelectorAll('[qk-datafrom]');
 		};
 
 		var triggerDataBind = function(){
 			for(var i = 0, l = datas.length; i < l; i++){
-				datas[i].bind(datas[i]);
+				dataBind.bind(datas[i]);
 			}
 		};
 
 		this.pageById = function(id){
 			for(var i = 0, l = pages.length; i < l; i++){
-				if(pages[i].dataset.id===id)
+				if(pages[i].getAttribute("qk-pageid")===id)
 					return i;
 			}
 			return -1;
