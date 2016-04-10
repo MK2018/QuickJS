@@ -1,1 +1,0 @@
-sphinxcontrib.gist == 0.1.0

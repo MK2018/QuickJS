@@ -23,7 +23,7 @@ If not, here's a basic html page to start with.
 
 .. gist:: https://gist.github.com/MK2018/b3aace803cd6804b7e5cc78b0ab298f8
 
-Copy this into a new HTML file, and put the ``quick.css`` and ``quick.js`` files into the same directory. Open the HTML file in a web browser, and it should display 'Welcome to Quick.JS!'
+Copy this into a new HTML file, and put the ``quick.css`` and ``quick.js`` files into the same directory. Open the HTML file in a web browser, and it should display 'Welcome to Quick.JS!' At this point, you can just build off of the template, and Quick.JS should be installed!
 
 Setup
 ========================
