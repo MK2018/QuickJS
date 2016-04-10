@@ -13,7 +13,7 @@ Head over to `Quick.JS' releases page <https://github.com/MK2018/QuickJS/release
 
 The Nice and Detailed Version
 --------------------------------
-If that paragraph above didn't quite work for you, don't worry. We can help. The very first thing that we'll need to do is to head over to the GitHub page for Quick.JS. This is where the code for Quick.JS lives, and it's where the released are housed for you to download them. The link to access the main repository with the latest source code is `here <https://github.com/MK2018/QuickJS>`_ and the code to access all of the prebuilt releases is `here <https://github.com/MK2018/QuickJS/releases>`_. We'll focus on the releases page.
+If that paragraph above didn't quite work for you, don't worry. We can help. The very first thing that we'll need to do is to head over to the GitHub page for Quick.JS. This is where the code for Quick.JS lives, and it's where the released are housed for you to download them. The link to access the main repository with the latest source code is `here <https://github.com/MK2018/QuickJS>`__ and the code to access all of the prebuilt releases is `here <https://github.com/MK2018/QuickJS/releases>`__. We'll focus on the releases page.
 
 On the releases page, the newest stable release will be at the top of the page. There is a short changelog and under it, there are 4 links: one for ``quick.css`` (this is for helping with styling), one for ``quick.js`` (this is the logic itself), and two for the source code of the release.
 
@@ -91,3 +91,41 @@ There are essential. Without these imports, Quick.JS is not installed. The next 
 	</html>
 
 These are how Quick.JS divides up an application into separate 'pages.' As we know, the purpose of Quick.JS is to provide a simple way to create one-page apps, with no linking to multiple pages. As such, it needs a way to split up an HTML page into separate, virtual, page-like entities. The ``<qk-page>`` tag is the answer. You can also see that each ``<qk-page>`` has an attribute associated with it called ``qk-pageid``. In order for a ``<qk-page>`` to be recognized as valid, it *must* have that attribute, which is essentially just a unique ID for the page.
+
+The final thing to note is the very last thing on the page. Take a look:
+
+.. code-block:: html
+
+	<!DOCTYPE html>
+	<html>
+		<head>
+			...
+		</head>
+		<body>
+			...
+			<script>
+				qk.go({
+					home: "page1",
+				});
+			</script>
+		</body>
+	</html>
+
+As you've probably realized by now, anytime you see ``qk``, it represents something to do with Quick.JS (for instance, ``qk-page``). In this case, we're calling Quick.JS' starting method, by using ``qk.go()``. You've also probably noticed that we have a line that says ``home: "page1",``. This is part of a list of arguments that are provided to Quick.JS in order to help it out. 
+
+Currently, the only argument that can be provided in the argument list is ``home``. Put in the ID of the ``qk-page`` that you intend to be the first page displayed. Recall that we specified the ID using the ``qk-pageid`` attribute.
+
+Note that since we provide a *list* of arguments, there are curly braces within the parentheses for the ``qk.go()`` method, like so: 
+
+.. code-block:: JavaScript
+
+	{
+		home: "page1",
+		...other arguments here,
+		...and here,
+		...in the future,
+	}
+
+Once this ``qk.go({args})`` method is called, the ball is rolling, and Quick.JS will format the page correctly. 
+
+Boom.
