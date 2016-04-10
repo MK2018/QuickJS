@@ -21,7 +21,34 @@ If you already have a working knowledge of HTML, and understand how to link CSS 
 
 If not, here's a basic html page to start with. 
 
-.. gist:: https://gist.github.com/MK2018/b3aace803cd6804b7e5cc78b0ab298f8
+.. code-block:: html
+
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<title>Quick.JS Demo Page!</title>
+			<link rel="stylesheet" type="text/css" href="./quick.css">
+		</head>
+		<body>
+			<qk-page qk-pageid="page1">
+				Welcome to Quick.JS!
+				<a qk-linkto="page2">Go to page 2</a>
+			</qk-page>
+			<qk-page qk-pageid="page2">
+				This is the second page of the demo app.
+				<a qk-linkto="page2">Go back to page 1</a>
+			</qk-page>
+			<script src="./quick.js"></script>
+			<script>
+				qk.go({
+					home: "page1",
+				});
+			</script>
+		</body>
+	</html>
 
 Copy this into a new HTML file, and put the ``quick.css`` and ``quick.js`` files into the same directory. Open the HTML file in a web browser, and it should display 'Welcome to Quick.JS!' At this point, you can just build off of the template, and Quick.JS should be installed!
 
