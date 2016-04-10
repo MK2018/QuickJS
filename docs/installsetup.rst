@@ -121,9 +121,9 @@ Note that since we provide a *list* of arguments, there are curly braces within 
 
 	{
 		home: "page1",
-		...other arguments here,
-		...and here,
-		...in the future,
+		//...other arguments here,
+		//...and here,
+		//...in the future,
 	}
 
 Once this ``qk.go({args})`` method is called, the ball is rolling, and Quick.JS will format the page correctly. 

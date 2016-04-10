@@ -1,10 +1,10 @@
 Welcome to Quick.JS's documentation!
 ====================================
 
-Contents:
+Table of Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :numbered:
 
    installsetup
-   quickstart
+   refguide
