@@ -28,9 +28,13 @@
 				</div>
 			</div>
 			<div class="row">
-		    	<div class="col-md-4 col-md-offset-4">
-					<input qk-datato="randData.sampleData3.test" autocomplete="off">
-					<div qk-datafrom="randData.sampleData3">Hello! My name is [[data.test]]</div>
+				<div class="col-md-4 col-md-offset-4" qk-datafrom="randData.sampleData2">
+					Time for some sanity checks: 
+					<ul>
+						<li><div>[[data.firstline]]</div></li>
+						<li><div>[[data.secondline]]</div></li>
+					</ul>
+					If both of the above make sense, the sanity checks have passed.	
 				</div>
 			</div>
 		</qk-page>
@@ -38,10 +42,8 @@
 			<div class="row">
 		    	<div class="col-md-4 col-md-offset-4">
 					Quick.JS is different.
-					<ul>
-						<li><div qk-datafrom="randData.sampleData2">[[data.firstline]]</div></li>
-						<li><div qk-datafrom="randData.sampleData2">[[data.secondline]]</div></li>
-					</ul>
+					<input qk-datato="randData.sampleData3.test" autocomplete="off">
+					<div qk-datafrom="randData.sampleData3">Hello! My name is [[data.test]]</div>
 				</div>
 			</div>
 			<div class="row">

@@ -70,7 +70,7 @@ Let's break down what's happening in that starter page. There are just a few thi
 		</body>
 	</html>
 
-There are essential. Without these imports, Quick.JS is not installed. The next thing to note is the ``<qk-page>`` tags scattered around the document, as we see here: 
+These are essential. Without these imports, Quick.JS is not installed. The next thing to note is the ``<qk-page>`` tags scattered around the document, as we see here: 
 
 .. code-block:: html
 

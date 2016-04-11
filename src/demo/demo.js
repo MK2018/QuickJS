@@ -1,3 +1,2 @@
-/*setTimeout( function(){
-	randData.sampleData.hello = "2-way binding is a go!";
-}, 3000);*/
+//var testdiv = document.querySelector("[dev-attr]");
+//console.log(testdiv.childNodes);

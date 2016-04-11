@@ -209,7 +209,10 @@ htmlhelp_basename = 'QuickJSdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
-latex_elements = { 'classoptions': ',openany,oneside', 'babel' : '\\usepackage[english]{babel}' }
+latex_elements = { 
+	'classoptions': ',openany,oneside', 
+	'babel' : '\\usepackage[english]{babel}' 
+}
 #latex_elements = {
 
 # The paper size ('letterpaper' or 'a4paper').
