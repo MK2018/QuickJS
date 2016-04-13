@@ -111,11 +111,21 @@ var qk = new function(){
 			parent[varname] = bindFrom.value;
 		};
 
-		this.bind = function(bindTo){
-			var unbound = bindTo.innerHTML;
-			var dataObj = parseDataSource(bindTo.getAttribute("qk-datafrom"), window);
-			var bound = getBoundString(dataObj, unbound, bindTo);
-			bindTo.innerHTML = bound;
+		this.bind = function(bindTo, dataPath){
+			var children = bindTo.childNodes;
+			if(dataPath === undefined)
+				dataPath = bindTo.getAttribute("qk-datafrom");
+			for(var i = 0, l = children.length; i < l; i++){
+				if(children[i].nodeName === "#text"){
+					var unbound = children[i].data;
+					var dataObj = parseDataSource(dataPath, window);
+					var bound = getBoundString(dataObj, unbound, bindTo);
+					children[i].data = bound;
+				}
+				else{
+					this.bind(children[i], dataPath);
+				}
+			}
 		};
 
 		var registerVarToWatch = function(parent, value, element, unbound){
@@ -250,7 +260,7 @@ var qk = new function(){
 			registerListeners();
 			fetchPagesAndData();
 			triggerDataBind();
-			displayHome(args.home);
+			displayHome(args.home);	
 		};
 	};
 
