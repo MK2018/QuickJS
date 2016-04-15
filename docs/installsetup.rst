@@ -11,7 +11,40 @@ Using a CDN
 
 Quick.JS is proud to be hosted on JSDelivr, the fastest commercially available content distribution network, or CDN for short. 
 
-A guide on how to use the `CDN <http://www.jsdelivr.com/projects/quickjs>`_ will be posted shortly.
+This allows you, the user, to access Quick.JS easier than ever. To get started with the CDN, just use this template page:
+
+.. code-block:: html
+
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<title>Quick.JS Demo Page!</title>
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/quickjs/latest/quick.min.css">
+		</head>
+		<body>
+			<qk-page qk-pageid="page1">
+				Welcome to Quick.JS!
+				<a qk-linkto="page2">Go to page 2</a>
+			</qk-page>
+			<qk-page qk-pageid="page2">
+				This is the second page of the demo app.
+				<a qk-linkto="page1">Go back to page 1</a>
+			</qk-page>
+			<script src="https://cdn.jsdelivr.net/quickjs/latest/quick.min.js"></script>
+			<script>
+				qk.go({
+					home: "page1",
+				});
+			</script>
+		</body>
+	</html>
+
+Instead of manually downloading Quick.JS' files and then hosting them on the web server of your choice, this outsources the hosting, not only increasing ease, but also increasing your page's load speed. 
+
+We hope that you enjoy this feature of Quick.JS. 
 
 GitHub
 --------
