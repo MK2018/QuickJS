@@ -1,19 +1,18 @@
 /*
-PLAN OF FRAMEWORK:
--------------------------------
-NOTES:
--As this is a one-page app framework, "page" shall henceforth mean a division of the site such that only one "page" is displayed at a time
+QUICK.JS
 
-1. HTML has custom tags, or tags with certian attributes applied, which break up the document
-	1.a. Include dynamic tags to separate out into "pages", possibly:
-		1.a.i. qk-page
-	1.b. Include static, permanent tags, possibly:
-		1.b.i. qk-const
-	1.c. (Possibly, we see where this ended up for Angular) Include conditional, Angular-style tags
-2. Custom CSS stylesheet bindings per page
-3. JS parsing of all of this info
-4. JS using info to carry out info as parsed
--------------------------------
+Copyright 2016 Michael Krause
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use 
+this file except in compliance with the License. You may obtain a copy of the 
+License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed 
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
+CONDITIONS OF ANY KIND, either express or implied. See the License for the 
+specific language governing permissions and limitations under the License.
 */
 var qk = new function(){
 
