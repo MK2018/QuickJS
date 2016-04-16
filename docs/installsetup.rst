@@ -9,7 +9,7 @@ To install Quick.JS, we have two options: getting the latest release from GitHub
 Using a CDN
 -------------
 
-Quick.JS is proud to be hosted on JSDelivr, the fastest commercially available content distribution network, or CDN for short. 
+Quick.JS is proud to be hosted on JSDelivr, one of the fastest commercially available content distribution networks, or CDNs for short. 
 
 This allows you, the user, to access Quick.JS easier than ever. To get started with the CDN, just use this template page:
 
@@ -50,6 +50,8 @@ We hope that you enjoy this feature of Quick.JS.
 
 GitHub
 --------
+
+If you would like to host your own copy of Quick.JS, use the absolute latest code, or contribute to Quick.JS, you likely want to grab Quick.JS from GitHub. 
 
 The Quick Version
 ++++++++++++++++++++
@@ -115,7 +117,9 @@ Let's break down what's happening in that starter page. There are just a few thi
 		</body>
 	</html>
 
-These are essential. Without these imports, Quick.JS is not installed. The next thing to note is the ``<qk-page>`` tags scattered around the document, as we see here: 
+These are essential. Without these imports, Quick.JS is not installed. If you used a CDN, those above statements were replaced with links to JSDelivr's servers. They function in the same manner.
+
+The next thing to note is the ``<qk-page>`` tags scattered around the document, as we see here: 
 
 .. code-block:: html
 
@@ -172,5 +176,3 @@ Note that since we provide a *list* of arguments, there are curly braces within 
 	}
 
 Once this ``qk.go({args})`` method is called, the ball is rolling, and Quick.JS will format the page correctly. 
-
-Boom.

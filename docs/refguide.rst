@@ -46,7 +46,9 @@ This is a feature that allows an element to be constantly displayed across pages
 2-way Data Binding
 ------------------------
 
-Quick.JS can do simple 2-way data binding, meaning that it can easily exchange data between the HTML page and an associated Javascript script. This is a very powerful and fairly robust system. More documentation will be provided soon on this.
+Quick.JS can do simple 2-way data binding, meaning that it can easily exchange data between the HTML page and an associated Javascript script. 
+
+Check out the documentation on data binding :doc:`here.<databind>`
 
 The Advantages of Quick.JS
 ---------------------------
