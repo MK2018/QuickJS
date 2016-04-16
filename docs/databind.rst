@@ -158,7 +158,7 @@ Okay. Let's uncomplicate things. Now that we've established what the double squa
 		this.sampleData = {"name" : "Quick.JS!"};
 	};
 
-Well. The ``Welcome to `` part of ``"Welcome to Quick.JS!"`` is gone! Don't worry, it's a perfect opportunity to demonstrate how we can mix standard text and Quick.JS' double bracket notation in the same ``div``. Take a look:
+Well. The ``Welcome to`` part of ``"Welcome to Quick.JS!"`` is gone! Don't worry, it's a perfect opportunity to demonstrate how we can mix standard text and Quick.JS' double bracket notation in the same ``div``. Take a look:
 
 .. code-block:: html
 
