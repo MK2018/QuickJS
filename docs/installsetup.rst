@@ -22,7 +22,8 @@ This allows you, the user, to access Quick.JS easier than ever. To get started w
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<title>Quick.JS Demo Page!</title>
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/quickjs/latest/quick.min.css">
+			<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/quickjs/latest/quick.min.css">
 		</head>
 		<body>
 			<qk-page qk-pageid="page1">
@@ -33,7 +34,8 @@ This allows you, the user, to access Quick.JS easier than ever. To get started w
 				This is the second page of the demo app.
 				<a qk-linkto="page1">Go back to page 1</a>
 			</qk-page>
-			<script src="https://cdn.jsdelivr.net/quickjs/latest/quick.min.js"></script>
+			<script 
+			src="https://cdn.jsdelivr.net/quickjs/latest/quick.min.js"></script>
 			<script>
 				qk.go({
 					home: "page1",
