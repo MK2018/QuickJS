@@ -39,6 +39,7 @@ var qk = new function(){
 			pages[currentPage].hide();
 			currentPage = main.pageById(to);
 			pages[currentPage].show();
+			history.pushState(null, null, "#"+to);
 		};
 
 	};
@@ -214,7 +215,7 @@ var qk = new function(){
 
 		var registerListeners = function(){
 			Array.prototype.slice.call(document.querySelectorAll('a[qk-linkto]')).forEach(function(current){
-				current.setAttribute("href", "#");
+				//current.setAttribute("href", "javascript:;");
 				current.addEventListener('click', function(){
 					nav.goto(current.getAttribute("qk-linkto"));
 				})
@@ -225,14 +226,26 @@ var qk = new function(){
 					dataBind.inputToBind(current);
 				})
 			});
+
+			window.onhashchange = displayPage;
 		};
 
-		var displayHome = function(home){
-			var hId = currentPage = main.pageById(home);
-			for(var i = 0, l = pages.length; i < l; i++){
-				pages[i].hide();
+		var displayPage = function(home){
+			if(window.location.hash === "" || window.location.hash === undefined){
+				var hId = currentPage = main.pageById(home);
+				for(var i = 0, l = pages.length; i < l; i++){
+					pages[i].hide();
+				}
+				pages[hId].show();
+				window.location.hash = home;		
 			}
-			pages[hId].show();		
+			else{
+				var hId = currentPage = main.pageById(window.location.hash.substring(1));
+				for(var i = 0, l = pages.length; i < l; i++){
+					pages[i].hide();
+				}
+				pages[hId].show();	
+			}
 		};
 
 		var fetchPagesAndData = function(){
@@ -259,7 +272,7 @@ var qk = new function(){
 			registerListeners();
 			fetchPagesAndData();
 			triggerDataBind();
-			displayHome(args.home);	
+			displayPage(args.home);	
 		};
 	};
 

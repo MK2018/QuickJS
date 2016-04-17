@@ -45,7 +45,7 @@ Let's now assume that in the same directory we have a Javascript file called ``d
 		this.sampleData = {"helloworld" : "Welcome to Quick.JS!"};
 	};
 
-As you can tell, it's a fairly small file, it has some critical characteristics. First, it has a *namespace*. This is denoted by:
+As you can tell, it's a fairly small file, but it has some critical characteristics. First, it has a *namespace*. This is denoted by:
 
 .. code-block:: javascript
 
@@ -93,7 +93,7 @@ In our HTML document, let's replace the line ``Welcome to Quick.JS!`` with a ``d
 		</body>
 	</html>
 
-Very good. If you've been paying attention, you'll have noticed that in our data file, we declared the value of our key-value pair to be ``"Welcome to Quick.JS!"``. Coincidence? Nope. We're going to make that ``div`` we just added say ``"Welcome to Quick.JS!"`` also, just with the magic of data binding. Let's do that now.
+Very good. If you've been paying attention, you'll have noticed that in our data file, we declared the value of our key-value pair to be ``"Welcome to Quick.JS!"``, which is what the page *used* to day before we replaced its contents with a ``div``. Coincidence? Nope. We're going to make that ``div`` we just added say ``"Welcome to Quick.JS!"`` also, just with the magic of data binding. Let's do that now.
 
 The first thing to change is to add a special attribute to that ``div``, like so:
 
@@ -148,7 +148,7 @@ Okay. The ``helloworld`` part makes sense: it's just the key for the value that 
 		"evenmoredata": "more data"};
 	};
 
-where we see that ``this.sampleData`` is not one JSON key-value pair, but rather an array of key-value pairs and another random pair, we can still navigate through our data. Say that we still wanted to access the ``"helloworld"`` key-value pair. Instead of using ``[[data.helloworld]]`` like we did previously, we can say ``[[data.data_array.helloworld]]. 
+where we see that ``this.sampleData`` is not one JSON key-value pair, but rather an array of key-value pairs and another random pair, we can still navigate through our data. Say that we still wanted to access the ``"helloworld"`` key-value pair. Instead of using ``[[data.helloworld]]`` like we did previously, we can say ``[[data.data_array.helloworld]]``. 
 
 Okay. Let's uncomplicate things. Now that we've established what the double square bracket notation is and what the ``data.`` prefix is, let's just assume that our ``data.js`` file looks like this:
 
