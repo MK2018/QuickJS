@@ -5,5 +5,5 @@ Welcome to Quick.JS's documentation!
 
    installsetup
    refguide
-   extrainfo
    databind
+   extrainfo
