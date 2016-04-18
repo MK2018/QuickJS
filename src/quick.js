@@ -274,7 +274,7 @@ var qk = new function(){
 			registerListeners();
 			fetchPagesAndData();
 			triggerDataBind();
-			globalArgs = args;
+			moduleArgs = args;
 			displayPage();	
 		};
 	};
