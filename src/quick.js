@@ -231,7 +231,7 @@ var qk = new function(){
 		};
 
 		var displayPage = function(home){
-			if(window.location.hash === "" || window.location.hash === undefined){
+			if(window.location.hash === "" || window.location.hash === undefined || window.location.hash === "#"){
 				var hId = currentPage = main.pageById(home);
 				for(var i = 0, l = pages.length; i < l; i++){
 					pages[i].hide();
