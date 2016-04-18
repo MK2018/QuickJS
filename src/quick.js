@@ -191,6 +191,8 @@ var qk = new function(){
 
 	var main = new function(){
 
+		var moduleArgs = {};
+
 		var registerElements = function(){
 			/**Define qk-page's prototype **/
 			var qkpageProto = Object.create(HTMLElement.prototype);
@@ -230,14 +232,14 @@ var qk = new function(){
 			window.onhashchange = displayPage;
 		};
 
-		var displayPage = function(home){
+		var displayPage = function(){
 			if(window.location.hash === "" || window.location.hash === undefined || window.location.hash === "#"){
-				var hId = currentPage = main.pageById(home);
+				var hId = currentPage = main.pageById(moduleArgs.home);
 				for(var i = 0, l = pages.length; i < l; i++){
 					pages[i].hide();
 				}
 				pages[hId].show();
-				window.location.hash = home;		
+				window.location.hash = moduleArgs.home;		
 			}
 			else{
 				var hId = currentPage = main.pageById(window.location.hash.substring(1));
@@ -272,7 +274,8 @@ var qk = new function(){
 			registerListeners();
 			fetchPagesAndData();
 			triggerDataBind();
-			displayPage(args.home);	
+			globalArgs = args;
+			displayPage();	
 		};
 	};
 
