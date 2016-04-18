@@ -7,7 +7,7 @@
 
     <title>Quick.JS</title>
 
-    <link rel="stylesheet" type="text/css" href="./quick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/quickjs/0.5.1b/quick.min.css" integrity="sha256-PmDuCVoY4DXR2usPzOUS3TWJF67FA8ezcVLCL+H3qa0=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
@@ -15,8 +15,32 @@
 
   </head>
   <body class="body-wrapper">
+    <!--<div class="qk-navbar">
+    </div>-->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Quick.JS</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Link</a></li> 
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
     <div class="container">
-        <qk-page data-id="page1">
+        <qk-page qk-pageid="page1">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     Welcome to Quick.JS!
@@ -24,11 +48,11 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <qk-link data-to="page2">Find out more...</qk-link>
+                    <a qk-linkto="page2">Find out more...</a>
                 </div>
             </div>
         </qk-page>
-        <qk-page data-id="page2">
+        <qk-page qk-pageid="page2">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     Quick.JS is a simple, easy to use JS framework currently in development. It aims to simplify building one page apps, enabling content to easily be separated out and displayed on a conditional basis.
@@ -36,11 +60,11 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <qk-link data-to="page3">Keep learning...</qk-link>
+                    <a qk-linkto="page3">Keep learning...</a>
                 </div>
             </div>
         </qk-page>
-        <qk-page data-id="page3">
+        <qk-page qk-pageid="page3">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     For now, let's get you started with this simple guide.
@@ -48,11 +72,11 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <qk-link data-to="page4">Let's go!</qk-link>
+                    <a qk-linkto="page4">Let's go!</a>
                 </div>
             </div>
         </qk-page>
-        <qk-page data-id="page4">
+        <qk-page qk-pageid="page4">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     Go to Quick.JS'<a href="https://github.com/MK2018/QuickJS"> Github </a> and download or clone the repo. We're going to be using the files from the <code>builds/</code> folder, so copy them into your working directory and link to them. Be sure to link the <code>quick.css</code> file in your header, and the <code>quick.js</code> file at the bottom of your page.
@@ -60,11 +84,11 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <qk-link data-to="page5">Continue...</qk-link>
+                    <a qk-linkto="page5">Continue...</a>
                 </div>
             </div>
         </qk-page>
-        <qk-page data-id="page5">
+        <qk-page qk-pageid="page5">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     Once you've done that, the very last thing on your page should be this....
@@ -76,14 +100,14 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <qk-link data-to="page1">Happy Coding!</qk-link>
+                    <a qk-linkto="page1">Happy Coding!</a>
                 </div>
             </div>
         </qk-page>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="./quick.js"></script>
+    <script src="https://cdn.jsdelivr.net/quickjs/0.5.1b/quick.min.js" integrity="sha256-scUqttM7SpGLfWnhtGYj7D6lfZ+Z1kmNYe4OmLgDkwk=" crossorigin="anonymous"></script>
     <script>
         qk.go({
             home: "page1",

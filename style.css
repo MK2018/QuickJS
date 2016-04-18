@@ -6,3 +6,16 @@
 	align-content: center;
 	text-align: center;
 }
+.qk-navbar{
+	position: fixed;
+	top: 0;
+	height: 7%;
+	width: 100%;
+	background-color: white;
+}
+nav{
+	z-index: 1000;
+}
+qk-page{
+	top: 10%;
+}
