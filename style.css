@@ -12,3 +12,14 @@ nav{
 qk-page{
 	top: 75px;
 }
+.qk-navbar{
+	font-size: .5em;
+}
+.qk-navhead{
+	font-size: .7em;
+}
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
