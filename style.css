@@ -23,3 +23,6 @@ qk-page{
      -moz-border-radius: 0 !important;
           border-radius: 0 !important;
 }
+a{
+	cursor: pointer;
+}
