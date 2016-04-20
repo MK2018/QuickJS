@@ -32,3 +32,6 @@ qk-const{
 body{
 	overflow: hidden;
 }
+a{
+    cursor: pointer;
+}

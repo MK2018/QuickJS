@@ -25,12 +25,14 @@ var qk = new function(){
 	};
 
 	var protos = new function(){
+		
 		this.show = function(){
 			this.style.display = "block";
 		};
 		this.hide = function(){
 			this.style.display = "none";
 		};
+		
 	};
 
 	var nav = new function(){
@@ -239,14 +241,19 @@ var qk = new function(){
 					pages[i].hide();
 				}
 				pages[hId].show();
-				window.location.hash = moduleArgs.home;		
+				history.pushState(null, null, "#"+moduleArgs.home);		
 			}
 			else{
 				var hId = currentPage = main.pageById(window.location.hash.substring(1));
 				for(var i = 0, l = pages.length; i < l; i++){
 					pages[i].hide();
 				}
-				pages[hId].show();	
+				if(hId < 0){
+					window.location.hash = "#";
+				}
+				else{
+					pages[hId].show();
+				}	
 			}
 		};
 
