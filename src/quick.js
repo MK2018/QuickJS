@@ -218,8 +218,7 @@ var qk = new function(){
 		};
 
 		var registerListeners = function(){
-			Array.prototype.slice.call(document.querySelectorAll('a[qk-linkto]')).forEach(function(current){
-				//current.setAttribute("href", "javascript:;");
+			Array.prototype.slice.call(document.querySelectorAll('[qk-linkto]')).forEach(function(current){
 				current.addEventListener('click', function(){
 					nav.goto(current.getAttribute("qk-linkto"));
 				})
