@@ -130,6 +130,13 @@ var qk = new function(){
 			}
 		};
 
+		var identifyDataType = function(data){
+			if(data.constructor === Array)
+				return 'array';
+			return 'single';
+			//eventually handle more types of data
+		};
+
 		var registerVarToWatch = function(parent, value, element, unbound){
 			parent.watch(String(value), function(varName, oldVal, newVal){
 				varsBound[varName].e.innerHTML = varsBound[varName].u;
