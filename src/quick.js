@@ -130,12 +130,12 @@ var qk = new function(){
 			}
 		};
 
-		var identifyDataType = function(data){
+		/*var identifyDataType = function(data){
 			if(data.constructor === Array)
 				return 'array';
 			return 'single';
 			//eventually handle more types of data
-		};
+		};*/
 
 		var registerVarToWatch = function(parent, value, element, unbound){
 			parent.watch(String(value), function(varName, oldVal, newVal){
@@ -169,7 +169,7 @@ var qk = new function(){
 						tokData.wasCloseBracket = false;
 						var varToBind = parseDataSource(tokData.activePath.substring(tokData.activePath.indexOf("data.")+5), dataObj);
 						registerVarToWatch(dataObj, tokData.activePath.substring(tokData.activePath.indexOf("data.")+5), element, origUnbound);
-						bound += varToBind;
+						bound += varToBind.toString();
 					}
 					else{
 						tokData.wasCloseBracket = true;
