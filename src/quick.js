@@ -169,6 +169,8 @@ var qk = new function(){
 						tokData.wasCloseBracket = false;
 						var varToBind = parseDataSource(tokData.activePath.substring(tokData.activePath.indexOf("data.")+5), dataObj);
 						registerVarToWatch(dataObj, tokData.activePath.substring(tokData.activePath.indexOf("data.")+5), element, origUnbound);
+						for(var i = 0; i < varToBind.length(); i++)
+							console.log(varToBind[i]);
 						bound += varToBind.toString();
 					}
 					else{
